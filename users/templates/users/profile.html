@@ -3,11 +3,12 @@
 {% block content %}
     <div class ="content-section">
         <div class = "media">
-            <img class = "rounded-circle account-img" scr = "{{user.profile.image}}">
+            <img class = "rounded-circle account-img" scr = "{{user.profile.image.url}}">
             <div class = "media-body">
                 <h2 class="account-heading">{{user.username}} </h2>
-                {% for following in Profile.follows.all %}
-            <p class = "text-secondary">{{following}} </p>
+                <p>followers:</p>
+                {% for following in follows %}
+            <p class = "text-secondary"> &emsp;{{following}} </p>
             {% endfor %}
             </div>
 

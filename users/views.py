@@ -32,7 +32,8 @@ def profile(request):
     profile = Profile.objects.all()
     #u_form = UserUpdateForm(instance=request.user)
     #p_form = ProfileUpdateForm(instance=request.user.profile)
-    context_dict = {"profile":profile,}
+    follows = Profile.objects.all()
+    context_dict = {"profile":profile,"follows":follows}
     #context_dict = {"profile":profile,"u_form":u_form, "p_form:":p_form}
     return render(request, 'users/profile.html',context_dict)
 

@@ -2,20 +2,22 @@
 
 {% block content %}
 
+<div>
+  {#<a href = "{% url 'create-room' %}">Create Room</a>#}
   {% for r in room %}
 
     <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
           <img class = "rounded-circle article-img" src ="{{r.host.profile.image.url}}" >
-          <a class="mr-2" href="#"> host: {{ r.host  }}</a>
+          <a class="mr-2" href="{% url 'users:profile'%}"> host: {{ r.host  }}</a>
           <small class="text-muted"> &emsp; {{ r.created|date:"F d, Y" }}</small>
         </div>
-        <h2><a class="article-title" href="#">{{ r.name }}</a></h2>
+        <h2><a class="article-title" href="{% url 'room' %">{{ r.name }}</a></h2>
         <p class="article-content"> Topic: {{ r.topic }}</p>
       </div>
     </article>
-
+  </div>
   {% endfor %}
 
   

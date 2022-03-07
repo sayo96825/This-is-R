@@ -25,12 +25,14 @@ from room import views
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('register/', users.views.register, name ='register'),
-    path('profile/', users.views.profile, name ='profile'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name ='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name ='logout'),
     path('', room.views.home, name ='home'),
     path('room/', include('room.urls')),
+    path('register/', users.views.register, name ='register'),
+    path('users/', include('users.urls')),
+    #path('profile/', users.views.profile, name ='profile'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name ='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name ='logout'),
+    #path('room/',room.views.room, name = 'room'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
