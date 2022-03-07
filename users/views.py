@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-
+from .models import Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+#from . forms import UserUpdateForm, ProfileUpdateForm
 # Create your views here.
 
 def register(request):
@@ -21,8 +22,18 @@ def register(request):
     content_dict ={'form': form}
     return render(request, 'users/register.html',content_dict)
 
+def profile_list(request):
+    profiles = Profile.objects.exclude(user=request.user)  # all user profiel except for your own
+    context_dict = {"profiles":profiles}
+    return render(request, "users/profile_list.html", context_dict)  
+
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    profile = Profile.objects.all()
+    #u_form = UserUpdateForm(instance=request.user)
+    #p_form = ProfileUpdateForm(instance=request.user.profile)
+    context_dict = {"profile":profile,}
+    #context_dict = {"profile":profile,"u_form":u_form, "p_form:":p_form}
+    return render(request, 'users/profile.html',context_dict)
 
 

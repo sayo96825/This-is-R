@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 
@@ -11,7 +12,7 @@ class Topic(models.Model):
 
 class Room(models.Model):
     host            = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    topic           = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
+    topic           = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True,blank = True)
     name            = models.CharField(max_length= 200)
     description     = models.TextField(null=True, blank = True)     #* null is for database blank is for form
     #participants   =                                               #  active user in the room
@@ -20,6 +21,12 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('room-detail', kwargs={'pk': self.pk})
+
+
+
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

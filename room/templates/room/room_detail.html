@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <img class = "rounded-circle article-img" src ="{{object.host.profile.image.url}}" >
+        <a class="mr-2" href="{% url 'room-detail'room.id %}"> host: {{ object.host  }}</a>
+        <small class="text-muted"> &emsp; {{ object.created|date:"F d, Y" }}</small>
+      </div>
+      <h2><a class="article-title" href="{% url 'room-detail' room.id %}">{{ object.name }}</a></h2>
+      <p class="article-content"> Topic: {{ object.topic }}</p>
+    </div>
+  </article>
+
+  {% endblock content %}
